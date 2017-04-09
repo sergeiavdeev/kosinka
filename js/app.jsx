@@ -6,6 +6,10 @@ class App extends React.Component{
         var deck = [];        
         var suit = 0;
         var val = 2;
+        
+        var col = [];
+                
+        //Упорядоченная колода
         for(var i = 0; i < 52; i++){
             
             deck[i] = {suit: suit, val: val, img: "k" + (i + 1) + ".png", state: false};
@@ -20,6 +24,7 @@ class App extends React.Component{
         
         var newDeck = [];
         
+        //Перемешиваем
         for(var i = 50; i >= 0; i--){
             
             var num = Math.floor(Math.random() * i);
@@ -30,25 +35,53 @@ class App extends React.Component{
         
         newDeck[51] = deck[0];
         
+        var count = 1;
+        
+        for(var i = 0; i < 7; i++){
+            
+            col[i] = [];
+            for(var j = 0; j < count; j++){
+                
+                col[i][j] = newDeck[0];
+                if(j == count - 1){
+                    col[i][j].state = true;
+                }
+                newDeck.splice(0, 1);
+            }
+            
+            count++;
+        }
+        
         this.state = {
-                deck: newDeck
+                deck: newDeck,
+                col: col
         };
     }    
     
-    render(){  
-        
-        var comp = this;
+    render(){
     
         return (
-        <div>
-            {this.state.deck.map(function(el, key){
-                return <img className = "card" key={key} src={el.state==true?"img/"+ el.img:"img/k0.png"} onClick={(e)=>comp.cardClick(e, key)} />;
-                })
-            }            
-        </div>
+        <div className="center">            
+            { 
+                this.state.col.map(function(el, key){
+                                
+                    return <div className="inline" key={key}>
+                            {this.renderCard(el)}
+                           </div>
+                }.bind(this))
+            }
+         </div>
         );
     }
 
+    renderCard(el){
+        
+        return el.map(function(el, key){
+            
+                    return <img key = {key} src = {el.state?"img/" + el.img:"img/k0.png"} className={key>0?"top":""} ></img>;
+                })
+    }
+    
     cardClick(e, key){
         
         var deck = this.state.deck.slice();
