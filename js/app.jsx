@@ -173,7 +173,7 @@ class App extends React.Component{
     }
     
     cardDragStart(ev){
-        
+                
         ev.dataTransfer.effectAllowed="move";
         ev.dataTransfer.dropEffect = "move";
         ev.dataTransfer.setData("text/plain", ev.target.id);
@@ -195,6 +195,7 @@ class App extends React.Component{
     
     cardDrop(e){
         
+        e.preventDefault();
         //console.log("drop!");
         var col = this.state.col.slice(); 
         var colToNum = Number(e.target.getAttribute("x"));
@@ -239,10 +240,7 @@ class App extends React.Component{
         return true;
     }
     
-    houseCardDrop(e){
         
-    }
-    
     cardDragEnter(ev) {
         ev.preventDefault();
         return true;
