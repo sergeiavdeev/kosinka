@@ -175,6 +175,8 @@ class App extends React.Component{
     cardDragStart(ev){
         
         ev.dataTransfer.effectAllowed="move";
+        ev.dataTransfer.dropEffect = "move";
+        ev.dataTransfer.setData("text/plain", ev.target.id);
                 
         var dragSrc = Number(ev.target.getAttribute("x"));
         var num = Number(ev.target.getAttribute("y")); 
@@ -219,7 +221,7 @@ class App extends React.Component{
             return;
         }
         
-        if(colToNum > 6 && colTo.length > 0 && (colTo[colTo.length - 1].val - drag[0].val != 1 || colTo[colTo.length - 1].suit != drag[0].suit)){
+        if(colToNum > 6 && colTo.length > 0 && (drag[0].val - colTo[colTo.length - 1].val != 1 || colTo[colTo.length - 1].suit != drag[0].suit)){
             return;
         }
         
