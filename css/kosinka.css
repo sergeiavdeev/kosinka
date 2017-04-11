@@ -1,5 +1,41 @@
 @CHARSET "UTF-8";
 
-.card{
+img{
+	display: block;	
+}
+
+td{
+	vertical-align: top;
+}
+
+table{
+	margin: auto;
+}
+
+div{
+	display: block;
+	margin: 5px;
+}
+
+
+.center{
+	margin: auto;
+}
+
+
+.card-on-card{	
+	margin-top: -80px;
+}
+
+.active-card{
 	cursor: pointer;
+}
+
+.desk{
+	background-image: url('../img/fon.png');
+	background-repeat: no-repeat;
+	background-position: top;
+	margin: auto;
+	width: 1000px;
+	height: 700px;
 }
