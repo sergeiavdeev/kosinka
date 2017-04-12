@@ -39,3 +39,7 @@ div{
 	width: 1000px;
 	height: 700px;
 }
+
+.none{
+	display: none;
+}
