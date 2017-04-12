@@ -66,19 +66,23 @@ class App extends React.Component{
             col[i] = [];
         }
         
+        
+        
         this.state = {
                 deck: newDeck,                
                 col: col,                
                 drag: null,                
-                dragSrc: null
-        };
+                dragSrc: null,
+                win: false
+        };        
     }    
     
     render(){
-    
+                    
         return (
         <div className="desk">
-            <table>
+            <canvas width="1000" height="700" id="fireworks-canvas" className={!this.state.win?"none desc":"desc"}></canvas>
+            <table className={this.state.win?"none":""}>
                 <tbody>
                     <tr>
                         <td><img src = {this.state.deck.length > 0?"img/k0.png":"img/void.png"} className = "active-card" onClick = {(e) => this.deckClick(e)} draggable ="false" /></td>
@@ -147,7 +151,40 @@ class App extends React.Component{
             >
         </img>;
     }
-           
+     
+         
+    
+    componentDidUpdate() {
+        
+        if(this.state.win){
+            
+            this.firework.start();
+        }
+    }
+    
+    componentDidMount(){
+        
+        this.firework = JS_FIREWORKS.Fireworks({
+            id : 'fireworks-canvas',
+            hue : 120,
+            particleCount : 50,
+            delay : 0,
+            minDelay : 20,
+            maxDelay : 40,
+            boundaries : {
+                top: 50,
+                bottom: 240,
+                left: 50,
+                right: 590
+            },
+            fireworkSpeed : 2,
+            fireworkAcceleration : 1.05,
+            particleFriction : .95,
+            particleGravity : 1.5
+        });
+        
+        //this.firework.start();
+    }
     
     deckClick(e){
         
@@ -270,7 +307,9 @@ class App extends React.Component{
                 }            
             }
         }
-                        
+        
+        this.setState({win: this.testWin(col)});
+        
         return true;
     }
     
@@ -283,6 +322,24 @@ class App extends React.Component{
     cardDragOver(ev) {
         
         ev.preventDefault();
+        return true;
+    }
+    
+    
+    testWin(col){
+        
+                
+        for(var i = 8; i < 12; i++){
+            
+            if(col[i].length == 0){
+                return false;
+            }
+            
+            if(col[i][col[i].length - 1].val != 13){
+                return false;
+            }            
+        }
+        
         return true;
     }
 }
