@@ -237,6 +237,40 @@ class App extends React.Component{
         }
         
         this.setState({col: col});
+        
+        var change = true;
+        
+        while(change){
+        
+            change = false;
+            
+            for(var i = 0; i < 7; i++){
+                
+                if(col[i].length == 0){
+                    continue;
+                }
+                
+                for(var j = 8; j < 12; j++){
+                    
+                    if(col[j].length == 0 || col[i].length == 0){
+                        continue;
+                    }
+                    
+                    if(col[i][col[i].length - 1].suit == col[j][col[j].length - 1].suit && col[i][col[i].length - 1].val - col[j][col[j].length - 1].val == 1){
+                        
+                        col[j][col[j].length] = col[i][col[i].length - 1];
+                        col[i].splice(col[i].length - 1, 1);
+                        if(col[i].length > 0){
+                            col[i][col[i].length - 1].state = true;
+                        }
+                        change = true;
+                        this.setState({col: col});
+                    }
+                    
+                }            
+            }
+        }
+                        
         return true;
     }
     
