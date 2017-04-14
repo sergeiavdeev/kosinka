@@ -275,16 +275,34 @@ class App extends React.Component{
         
         this.setState({col: col});
         
+        var auto = true;
+        
+        for(var i = 0; i < 7; i++){
+            
+            if(col[i].length == 0){
+                continue;
+            }
+            
+            if(!col[i][0].state){
+                auto = false;
+                break;
+            }
+        }
+        
         var change = true;
         
-        while(change){
+        while(change && auto){
         
             change = false;
             
             for(var i = 0; i < 7; i++){
-                
+                                                
                 if(col[i].length == 0){
                     continue;
+                }
+                
+                if(!col[i][0].state){
+                    break;
                 }
                 
                 for(var j = 8; j < 12; j++){
