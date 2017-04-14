@@ -131,25 +131,25 @@ class App extends React.Component{
         return el.map(function(el, key){
             
                     return <img key = {key} x = {col} y = {key} src = {el.state?"img/" + el.img:"img/k0.png"} 
-                        className={(key>0?"card-on-card":"") + (el.state?" active-card":"")} 
-                        draggable = {el.state?"true":"false"} 
-                        onDragStart={(e) => this.cardDragStart(e)} 
-                        onDrop={(e) => this.cardDrop(e)}
-                        onDragEnter = {(e) => this.cardDragEnter(e)}
-                        onDragOver = {(e) => this.cardDragOver(e)}
-                        >
-                    </img>;
+                                className={(key>0?"card-on-card":"") + (el.state?" active-card":"")} 
+                                draggable = {el.state?"true":"false"} 
+                                onDragStart={(e) => this.cardDragStart(e)} 
+                                onDrop={(e) => this.cardDrop(e)}
+                                onDragEnter = {(e) => this.cardDragEnter(e)}
+                                onDragOver = {(e) => this.cardDragOver(e)}
+                                >
+                            </img>;
                 }.bind(this))
     }
     
     renderVoid(x){
         
         return <img src = "img/void.png" draggable = "false" x = {x}
-            onDrop={(e) => this.cardDrop(e)}
-            onDragEnter = {(e) => this.cardDragEnter(e)}
-            onDragOver = {(e) => this.cardDragOver(e)}
-            >
-        </img>;
+                onDrop={(e) => this.cardDrop(e)}
+                onDragEnter = {(e) => this.cardDragEnter(e)}
+                onDragOver = {(e) => this.cardDragOver(e)}
+                >
+               </img>;
     }
      
          
@@ -182,8 +182,6 @@ class App extends React.Component{
             particleFriction : .95,
             particleGravity : 1.5
         });
-        
-        //this.firework.start();
     }
     
     deckClick(e){
@@ -201,8 +199,6 @@ class App extends React.Component{
             deck.splice(0, 1);
         }
         
-        
-        
         this.setState({
             deck: deck,
             col: col
@@ -216,7 +212,7 @@ class App extends React.Component{
             ev.dataTransfer.effectAllowed="move";
             ev.dataTransfer.dropEffect = "move";
         }catch(e){
-            console.log("Fuck IE!");
+            console.log("Fuck IE11!");
         }
         
                 
@@ -259,8 +255,7 @@ class App extends React.Component{
             return;
         }
         
-        if(colToNum < 7 && colTo.length > 0 && ((colTo[colTo.length - 1].val - drag[0].val) != 1 || colTo[colTo.length - 1].color == drag[0].color)){
-            
+        if(colToNum < 7 && colTo.length > 0 && ((colTo[colTo.length - 1].val - drag[0].val) != 1 || colTo[colTo.length - 1].color == drag[0].color)){            
             return;
         }
         
@@ -325,8 +320,7 @@ class App extends React.Component{
                         }
                         change = true;
                         this.setState({col: col});
-                    }
-                    
+                    }                    
                 }            
             }
         }
@@ -342,6 +336,7 @@ class App extends React.Component{
         return true;
     }
     
+    
     cardDragOver(ev) {
         
         ev.preventDefault();
@@ -349,8 +344,7 @@ class App extends React.Component{
     }
     
     
-    testWin(col){
-        
+    testWin(col){        
                 
         for(var i = 8; i < 12; i++){
             
