@@ -210,10 +210,15 @@ class App extends React.Component{
     }
     
     cardDragStart(ev){
-                
-        ev.dataTransfer.effectAllowed="move";
-        ev.dataTransfer.dropEffect = "move";
-        ev.dataTransfer.setData("text/plain", ev.target.id);
+        
+        try{
+            ev.dataTransfer.setData("text", ev.target.id);
+            ev.dataTransfer.effectAllowed="move";
+            ev.dataTransfer.dropEffect = "move";
+        }catch(e){
+            console.log("Fuck IE!");
+        }
+        
                 
         var dragSrc = Number(ev.target.getAttribute("x"));
         var num = Number(ev.target.getAttribute("y")); 
