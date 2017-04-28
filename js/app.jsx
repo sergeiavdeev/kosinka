@@ -33,13 +33,29 @@ class App extends React.Component{
         //Перемешиваем
         for(var i = 50; i >= 0; i--){
             
-            var num = Math.floor(Math.random() * i);
+            var n = Math.random();
+            var num = Math.floor(n * (i+2));
+            //console.log(deck[num]);
                                     
             newDeck[50 - i] = deck[num];
             deck.splice(num, 1);
         }
         
         newDeck[51] = deck[0];
+        
+        //2-раз
+        var newDeck1 = [];
+        for(var i = 50; i >= 0; i--){
+            
+            var n = Math.random();
+            var num = Math.floor(n * (i+2));
+            //console.log(newDeck[num]);
+                                    
+            newDeck1[50 - i] = newDeck[num];
+            newDeck.splice(num, 1);
+        }
+        
+        newDeck1[51] = newDeck[0];
         
         var count = 1;
         
@@ -49,11 +65,11 @@ class App extends React.Component{
             col[i] = [];
             for(var j = 0; j < count; j++){
                 
-                col[i][j] = newDeck[0];
+                col[i][j] = newDeck1[0];
                 if(j == count - 1){
                     col[i][j].state = true;
                 }
-                newDeck.splice(0, 1);
+                newDeck1.splice(0, 1);
             }
             
             count++;
@@ -69,7 +85,7 @@ class App extends React.Component{
         
         
         this.state = {
-                deck: newDeck,                
+                deck: newDeck1,                
                 col: col,                
                 drag: null,                
                 dragSrc: null,
